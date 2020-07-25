@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="../static/css/sign_up.css">
+    <title>sign up</title>
+{% endblock %}
+{% block body %}
+    <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/sign_up.js') }}"></script>
+
+    <div class="center ggg">
+        <h2 class="title">Login Screen</h2>
+        <h3 class="username">UserName:</h3>
+        <h3 class="password00">Password:</h3>
+        <h3 class="password01">Repeat Password:</h3>
+
+        <input type="text"     id="username" class="textarea e-name"                  rows="1" cols="15">
+        <input type="password" id="password0" class="textarea pass0" autocomplete="on" rows="1" cols="15">
+        <input type="password" id="password1" class="textarea pass1" autocomplete="on" rows="1" cols="15">
+
+
+        <button class="button" onclick="send_data()">></button> 
+    </div>
+    {% if error %}
+        <script>
+            alert("please repeat password correctly...");
+        </script>
+    {% endif %}
+{% endblock %}

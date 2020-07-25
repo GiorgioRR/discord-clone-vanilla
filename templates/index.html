@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="../static/css/style.css" type="text/css">
+    <title>safe chat</title>
+
+{% endblock %}
+{% block body %}
+    <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+
+    <div class="left">
+        <h1 id="user" class="user">{{user_name}}</h1>
+        <nav>
+            <ul>
+                <li class="li"><a href="/welcome/"># welcome</a></li>
+                <li class="li"><a href="/announcements/"># announcements</a></li>
+                <li class="li"><a href="/rules/"># rules</a></li>
+                <li class="li"><a href="/whoami/"># whoami</a></li>
+
+                <li class="li"><a href="/general/"># general</a></li>
+                <li class="li"><a href="/ლინუქსი/"># ლინუქსი</a></li>
+                <li class="li"><a href="/მეცნიერება/"># მეცნიერება</a></li>
+                <li class="li"><a href="/კრიპტოგრაფია/"># კრიპტოგრაფია</a></li>
+                <li class="li"><a href="/coding-challenges/"># coding-challenges</a></li>
+                <li class="li"><a href="/movies-n-books/"># movies-n-books</a></li>
+                <li class="li"><a href="/hacking-penetration-forensics-ctf/"># hacking-penetration-forensics-ctf</a></li>
+                <li class="li"><a href="/multiplayer-games/"># multiplayer-games</a></li>
+                <li class="li"><a href="/good-stuff/"># good-stuff</a></li>
+                <li class="li"><a href="/tldr/"># tldr</a></li>
+                <li class="li"><a href="/memes/"># memes</a></li>
+
+                <li class="li"><a href="/python/"># python</a></li>
+                <li class="li"><a href="/c-cpp/"># c-cpp</a></li>
+                <li class="li"><a href="/java/"># java</a></li>
+                <li class="li"><a href="/front-end/"># front-end</a></li>
+                <li class="li"><a href="/database-languages/"># database-languages</a></li>
+
+                <li class="li"><a href="/el-general/"># general</a></li>
+                <li class="li"><a href="/radio-circuits/"># radio-circuits</a></li>
+
+                <li class="li"><a href="/bot-spam/"># bot-spam</a></li>
+                <li class="li"><a href="/music/"># music</a></li>
+                <li class="li"><a href="/git/"># git</a></li>
+                <li class="li"><a href="/github-notifs."># github-notifs</a></li>
+
+                <li class="li" onclick="send_data('v-general')"><a href="#">v General</a></li> <!-- href="/v-general/"-->
+                <li class="li" onclick="send_data('v-funker')"><a href="#">v Funker</a></li>   <!-- href="/funker/"   -->
+
+                <li class="li"><a href="/root/"># root</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="center">
+        <h1 id="category"># {{title.decode("utf-8")}}</h1>
+        <a class="log_out" href="/log_out/">Log out</a>
+
+        <div class="chat-screen">
+            <h4 class="author">author</h4>
+            <h4 class="message">message</h4>
+            <h4 class="date">date</h4>
+
+            {% for message in messages %}
+
+                <script>
+                     append_message('{{message.username}}', '{{message.message}}', '{{message.date}}', "{{title.decode('utf-8')}}");
+                </script>
+
+                <!--
+                    <h4 class="author">{{message.username}}</h4>
+                    <h4 class="message">{{message.message}}</h4>
+                    <h4 class="date">{{message.date}}</h4>
+                -->
+            {% endfor %}
+
+            <h4 id="last"></h4>
+            
+            <script>
+                document.getElementById('last').scrollIntoView();
+            </script>
+        </div>
+
+        <textarea id="text-area" type="text" name="text-input" placeholder="Message #{{title.decode('utf-8')}}" rows="10" cols="30"></textarea>
+        <button class="go-button" onclick="send_message()">(Shift+E) >></button>
+
+        <svg class="attachButton" onclick="append_file()" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentColor"
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z">
+            </path>
+        </svg>
+    </div>
+
+    <div id="right" class="right"></div>
+
+    <script>main();</script>
+{% endblock %}

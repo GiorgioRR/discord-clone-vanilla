@@ -1,0 +1,173 @@
+/*
+    white:          #fff;
+    gwhite:         #cfd9e4
+    bright grey:    #2e4153;
+    dark grey:      #161f27;
+*/
+/* --------------------------------------------------------- */
+/* BASIC SETUP */
+/* --------------------------------------------------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body { height: 100%; width: 100%; margin: 0; }
+/* div { height: 100%; width: 100%; background: black; } */
+
+html {
+    background-color: #fff;
+    color: #3c3c3c;
+    font-family: "Lato", "Arial", sans-serif;
+    font-size: 20px;
+    text-rendering: optimizeLegibility;
+    /* overflow-y: hidden; */
+}
+
+body {
+    position: fixed;
+    height: 100hv;
+    background-color: #1c2732;
+}
+
+a {
+    color: #cfd9e4;
+    text-decoration: none;
+}
+
+a, button, div, input, select, span, strong, textarea {
+    outline: 0;
+}
+
+/* --------------------------------------------------------- */
+/* REUSABLE COMPONENTS */
+/* --------------------------------------------------------- */
+
+.left {
+    display: inline-block;
+    height: 100vh;
+    width: 17%;
+    color: #cfd9e4;
+    background-color: #161f27;
+    padding: 0px 10px;
+}
+
+.center {
+    display: inline-block;
+    vertical-align: top;
+    height: 100vh;
+    width: 62%;
+    color: #cfd9e4;
+    background-color: #2e4153;
+    padding: 1px;
+}
+
+.right {
+    display: inline-block;
+    vertical-align: top;
+    height: 100vh;
+    width: 19%;
+    color: #cfd9e4;
+    background-color: #161f27;
+}
+
+/* ------------- HEADING ------------- */
+h1 {
+    height: 5%;
+    padding-left: 10px;
+    font-size: 22px;
+    color: white;
+    padding-bottom: 10px;
+    border-bottom: 2px solid black;
+}
+
+h2 {
+    padding-top: 4px;
+    padding-left: 10px;
+    font-size: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.chat-screen {
+    margin: 5px;
+    height: 78vh;
+    width: 99%;
+    background-color: #283848;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.online {
+    color: #4810f6;
+}
+
+#text-area {
+    position: absolute;
+    resize: none !important;
+    overflow: hidden !important;
+    top: 89%;
+    left: 18%;
+    height: 10%;
+    width: 61%;
+    background-color: #46637f;
+}
+
+.text-area::placeholder {
+    color: black;
+}
+
+.attachButton {
+    position: absolute;
+    top: 90%;
+    left: 77%;
+}
+
+.log_out:link,
+.log_out:visited {
+    position: absolute;
+    top: 2%;
+    left: 74%;
+}
+
+.log_out:hover,
+.log_out:active {
+    background-color: black;
+    color: white;
+}
+
+h4 {
+    display: inline-block;
+    font-size: 14px;
+}
+
+.author {
+    width: 12%;
+    margin-left: 4px;
+    vertical-align: top;
+    text-align: left;
+}
+
+.message {
+    width: 75%;
+    vertical-align: top;
+}
+
+.date {
+    width: 10%;
+    vertical-align: top;
+    text-align: right;
+}
+
+.go-button {
+    position: absolute;
+    /* width: 30px; */
+    font-size: 15px;
+    top: 95%;
+    left: 73%;
+    border: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0px;
+}
