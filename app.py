@@ -36,7 +36,7 @@ cache = Cache(config={'CACHE_TYPE': 'simple'})
 
 app = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
 app.config.from_mapping(config)
-app.config["SECRET_KEY"]              = "Kommando321.0("
+app.config["SECRET_KEY"]              = "$fdvnjDFE&*)EEDN@d.0("
 app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DATABASE}"
 db = SQLAlchemy(app)
 

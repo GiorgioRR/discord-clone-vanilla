@@ -6,10 +6,8 @@ function append_file () {
 function urlify (text) {
     var urlRegex = /(https?:\/\/[^\s]+)/g;
     return text.replace(urlRegex, function(url) {
-      return '</a12>' + url + '</a12>';
+      return `</a12>${url}</a12>`;
     })
-    // or alternatively
-    // return text.replace(urlRegex, '<a href="$1">$1</a>')
 }
 
 
@@ -17,18 +15,6 @@ function append_message (t_author, t_message, t_date, v_category){
     t_category = document.getElementById("category").textContent;
 
     if (v_category.toLowerCase() == t_category.substring(2).toLowerCase()){
-        var author  = document.createElement("h4");
-        var message = document.createElement("h4");
-        var date    = document.createElement("h4");
-
-        author.className  = "author";
-        message.className = "message";
-        date.className    = "date";
-
-        author.appendChild(document.createTextNode(t_author));
-        // message.appendChild(document.createTextNode(t_message));
-        date.appendChild(document.createTextNode(t_date));
-
         try {
             // Try to convert to utf-8
             // If the conversion succeeds, text is not utf-8
@@ -39,7 +25,8 @@ function append_message (t_author, t_message, t_date, v_category){
         }
 
         // console.log(typeof(t_message));
-        var t_message = urlify(t_message); // ავღნიშნოთ <a>-ით ლინკები
+        var t_message = urlify(t_message); // ავღნიშნოთ <a>-თი ლინკები
+        var message = "";
 
         var lines = t_message.split("\n");
         for (i = 0; i < lines.length; i++) {
@@ -49,37 +36,32 @@ function append_message (t_author, t_message, t_date, v_category){
                 for (i = 0; i < length; i++) {
                     var text_l = links[i];
                     if (i % 2 == 1) {
-                        
+                        var a_html = `<a href="#{text_l}", target="_blank">${text_l}</a>`;
 
-                        var a = document.createElement('a');  
-                        var t_text = document.createTextNode(text_l);
-
-                        a.appendChild(t_text);
-                        // a.title = text_l;
-                        a.href = text_l;
-                        a.target = "_blank";
-
-                        message.appendChild(a);
+                        message += a;
                     }
                     else {
-                        message.appendChild(document.createTextNode(text_l));
+                        message += text_l;
                     }
                 }
             }
             else {
-                message.appendChild(document.createTextNode(lines[i]));
+                message += lines[i];
             }
-
-            message.appendChild(document.createElement("br"));
+            message += "</br>";
         }
 
-        document.getElementsByClassName("chat-screen")[0].appendChild(author);
-        document.getElementsByClassName("chat-screen")[0].appendChild(message);
-        document.getElementsByClassName("chat-screen")[0].appendChild(date);
+        var html = `
+        <div class="mmm">
+            <h4 class="author">${t_author}</h4>
+            <h4 class="message">${message}</h4>
+            <h4 class="date">${t_date}</h4>
+        </div>
+        `;
+        document.getElementById("chat-screen").innerHTML += html;
     }
     else {
         new_message(v_category);
-
     // document.getElementById("text-area").value = "";
     }
 }
@@ -93,7 +75,7 @@ function new_message (category){
                       "root"]
 
     var items = document.getElementsByClassName("li");
-    var num = categories.indexOf(category);
+    var num   = categories.indexOf(category);
     
     items[num].style.backgroundColor = "white";
     items[num].style.color = "black";  // no idea why, but this doesn't works
@@ -108,50 +90,28 @@ function status_bar ( data ){
     }
 
     const parsed = JSON.parse(JSON.stringify(data));
-
-    admin   = document.createElement("h2");
-    admin.appendChild(document.createTextNode("ADMIN - " + parsed.num_of_users[0]));
-    right.appendChild(admin);
+    
+    var s_html = `<h2>ADMIN - ${parsed.num_of_users[0]}</h2>`;
     for (i=0; i < parsed.admins.length; i++) {
-        a = document.createElement("h2");
-        a.className = "online";
-        a.appendChild(document.createTextNode("--- " + parsed.admins[i]));
-
-        right.appendChild(a);
+        s_html += `<h2 class="online">--- ${parsed.admins[i]}</h2>`;
     }
 
-    moderator = document.createElement("h2");
-    moderator.appendChild(document.createTextNode("MODERATOR - " + parsed.num_of_users[1]));
-    right.appendChild(moderator);
+    s_html += `<h2>MODERATOR - ${parsed.num_of_users[1]}</h2>`;
     for (i=0; i < parsed.moderators.length; i++) {
-        a = document.createElement("h2");
-        a.className = "online";
-        a.appendChild(document.createTextNode("--- " + parsed.moderators[i]));
-
-        right.appendChild(a);
+        s_html += `<h2 class="online">--- ${parsed.moderators[i]}</h2>`;
     }
 
-    online = document.createElement("h2");
-    online.appendChild(document.createTextNode("ONLINE - " + parsed.num_of_users[2]));
-    right.appendChild(online);
+    s_html += `<h2>ONLINE - ${parsed.num_of_users[2]}</h2>`;
     for (i=0; i < parsed.online.length; i++) {
-        a = document.createElement("h2");
-        a.className = "online";
-        a.appendChild(document.createTextNode("--- " + parsed.online[i]));
-
-        right.appendChild(a);
+        s_html += `<h2 class="online">--- ${parsed.online[i]}</h2>`;
     }
 
-    offline = document.createElement("h2");
-    offline.appendChild(document.createTextNode("OFFLINE - " + parsed.num_of_users[3]));
-    right.appendChild(offline);
+    s_html += `<h2>OFFLINE - ${parsed.num_of_users[3]}</h2>`;
     for (i=0; i < parsed.offline.length; i++) {
-        a = document.createElement("h2");
-        a.className = "online";
-        a.appendChild(document.createTextNode("--- " + parsed.offline[i]));
-
-        right.appendChild(a);
+        s_html += `<h2 class="online">--- ${parsed.offline[i]}</h2>`;
     }
+
+    right.innerHTML += s_html;
 }
 
 
@@ -166,7 +126,6 @@ function send_message (){
             category: vv_category,
             message : user_input  // encodeURI(user_input)
         })
-        document.getElementById("text-area").value = "";
     }
 }
 
@@ -182,8 +141,11 @@ function main (){
     var entry_t = document.getElementById("text-area");
     entry_t.addEventListener("keypress", function (e) {  // bind shift+enter to send a message
         if (e.keyCode == 13 && e.shiftKey) {
-            console.log("fucked u");
+            // pass - this does what it is supposed to do
+        }
+        else if (e.keyCode == 13) {
             send_message();
+            entry_t.value = "";
         }
     }
     );
@@ -203,6 +165,8 @@ function main (){
         // typeof(msg) == object
         const parsed = JSON.parse(JSON.stringify(msg));
         append_message(parsed.user_name, parsed.message, parsed.date, parsed.category);
+        let el = document.getElementsByClassName("mmm");
+        el[el.length-1].scrollIntoView();
     })
 
     socket.on( 'connect/disconnect', function( msg ) {
@@ -211,4 +175,5 @@ function main (){
 }
 
 
-var socket = io.connect('http://' + document.domain + ':' + location.port);
+// console.log(`http://${document.domain}:${location.port}`);
+var socket = io.connect(`http://${document.domain}:${location.port}`);

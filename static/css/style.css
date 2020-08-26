@@ -14,8 +14,7 @@
     box-sizing: border-box;
 }
 
-html, body { height: 100%; width: 100%; margin: 0; }
-/* div { height: 100%; width: 100%; background: black; } */
+html, body { height: 100vh; width: 100%; }
 
 html {
     background-color: #fff;
@@ -27,9 +26,10 @@ html {
 }
 
 body {
-    position: fixed;
-    height: 100hv;
+    display: flex;
+    justify-content: space-betweens;
     background-color: #1c2732;
+    font-size: 20px;
 }
 
 a {
@@ -41,22 +41,37 @@ a, button, div, input, select, span, strong, textarea {
     outline: 0;
 }
 
+li {
+    font-size: 1em;
+}
+
 /* --------------------------------------------------------- */
 /* REUSABLE COMPONENTS */
 /* --------------------------------------------------------- */
 
-.left {
-    display: inline-block;
+#left {
     height: 100vh;
     width: 17%;
     color: #cfd9e4;
     background-color: #161f27;
     padding: 0px 10px;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
-.center {
-    display: inline-block;
-    vertical-align: top;
+::-webkit-scrollbar {
+    width: 10px;
+    background: none;
+    box-shadow: none;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #a6a6a6;
+
+}
+
+#center {
     height: 100vh;
     width: 62%;
     color: #cfd9e4;
@@ -64,13 +79,13 @@ a, button, div, input, select, span, strong, textarea {
     padding: 1px;
 }
 
-.right {
-    display: inline-block;
-    vertical-align: top;
+#right {
     height: 100vh;
     width: 19%;
     color: #cfd9e4;
     background-color: #161f27;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 /* ------------- HEADING ------------- */
@@ -90,9 +105,13 @@ h2 {
     border-bottom: 1px solid #ccc;
 }
 
-.chat-screen {
+ul {
+    list-style: none;
+}
+
+#chat-screen {
     margin: 5px;
-    height: 78vh;
+    height: 81vh;
     width: 99%;
     background-color: #283848;
     overflow: hidden;
@@ -100,17 +119,21 @@ h2 {
 }
 
 .online {
+    font-size: .8em;
     color: #4810f6;
+}
+
+.input {
+
 }
 
 #text-area {
     position: absolute;
     resize: none !important;
     overflow: hidden !important;
-    top: 89%;
-    left: 18%;
     height: 10%;
-    width: 61%;
+    width: 61%; /* 99% */
+    margin-left: 5px;
     background-color: #46637f;
 }
 
@@ -118,17 +141,27 @@ h2 {
     color: black;
 }
 
-.attachButton {
-    position: absolute;
-    top: 90%;
-    left: 77%;
+.append-file {
+    position: relative;
+    cursor: pointer;
+    top: 4%;
+    left: 96%;
+}
+
+.go-button {
+    font-size: 15px;
+    border: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0px;
+    margin-top: 3vh;
+
+    cursor: pointer;
 }
 
 .log_out:link,
 .log_out:visited {
-    position: absolute;
-    top: 2%;
-    left: 74%;
+    top: 1%;
 }
 
 .log_out:hover,
@@ -138,36 +171,61 @@ h2 {
 }
 
 h4 {
-    display: inline-block;
+    /* display: inline-block; */
     font-size: 14px;
 }
 
-.author {
-    width: 12%;
+.mmm .author {
+    min-width: 12%;
     margin-left: 4px;
     vertical-align: top;
-    text-align: left;
+    /* text-align: left; */
 }
 
-.message {
+.mmm .message {
     width: 75%;
+    margin-left: 4px;
     vertical-align: top;
 }
 
-.date {
+.mmm .date {
     width: 10%;
     vertical-align: top;
     text-align: right;
 }
 
-.go-button {
-    position: absolute;
-    /* width: 30px; */
-    font-size: 15px;
-    top: 95%;
-    left: 73%;
-    border: 0;
-    background: none;
-    box-shadow: none;
-    border-radius: 0px;
+.mmm {
+    display: flex;
+    justify-content: space-between;
+    /* overflow-anchor: ; */
+}
+
+#top {
+    display: flex;
+    justify-content: space-between;
+    height: 6%;
+}
+
+#top h1 {
+    border-bottom: 0px;
+}
+
+#log_out {
+    padding-right: 4px;
+}
+
+#user {
+    font-size: 1.1em;
+}
+
+@media only screen and (max-width: 860px) {
+    body {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 797px) {
+    .append-file {
+        left: 94%;
+    }
 }
