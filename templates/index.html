@@ -7,8 +7,8 @@
 {% endblock %}
 {% block body %}
     <!-- <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script type="text/javascript" async src="{{ url_for('static', filename='scripts/main.js') }}"></script>
 
     <div id="left">
         <h1 id="user">{{user_name}}</h1>
