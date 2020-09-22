@@ -1,0 +1,222 @@
+/*
+    white:          #fff;
+    gwhite:         #cfd9e4
+    bright grey:    #2e4153;
+    dark grey:      #161f27;
+*/
+/* --------------------------------------------------------- */
+/* BASIC SETUP */
+/* --------------------------------------------------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body { height: 100vh; width: 100%; }
+
+html {
+    background-color: #fff;
+    color: #3c3c3c;
+    font-family: "Lato", "Arial", sans-serif;
+    font-size: 20px;
+    text-rendering: optimizeLegibility;
+    /* overflow-y: hidden; */
+}
+
+body {
+    display: flex;
+    justify-content: space-betweens;
+    background-color: #1c2732;
+    font-size: 20px;
+
+    div {
+        height: 100vh;
+        color: #cfd9e4;
+    }
+
+    #left {
+        width: 17%;
+        background-color: #161f27;
+        padding: 0px 10px;
+        overflow: hidden;
+        overflow-y: scroll;
+
+        #user {
+            font-size: 1.1em;
+        }
+
+        nav ul {
+            list-style: none;
+
+            li {
+                font-size: 1em;
+            }
+        }
+    }
+
+    #center {
+        width: 62%;
+        background-color: #2e4153;
+        padding: 1px;
+
+        #top {
+            display: flex;
+            justify-content: space-between;
+            height: 6%;
+            
+            h1 {
+                border-bottom: 0px;
+            }
+            
+            #log_out {
+                padding-right: 4px;
+            }
+            
+            .log_out:link,
+            .log_out:visited {
+                top: 1%;
+            }
+
+            .log_out:hover,
+            .log_out:active {
+                background-color: black;
+                color: white;
+            }
+        }
+
+        #chat-screen {
+            margin: 5px;
+            height: 81vh;
+            width: 99%;
+            background-color: #283848;
+            overflow: hidden;
+            overflow-y: scroll;
+
+            .mmm {
+                display: flex;
+                justify-content: space-between;
+                /* overflow-anchor: ; */
+
+                .author {
+                    min-width: 12%;
+                    margin-left: 4px;
+                    vertical-align: top;
+                    /* text-align: left; */
+                }
+
+                .message {
+                    width: 75%;
+                    margin-left: 4px;
+                    vertical-align: top;
+                }
+
+                .date {
+                    width: 10%;
+                    vertical-align: top;
+                    text-align: right;
+                }
+            }
+        }
+
+        .input {
+            #text-area {
+                position: absolute;
+                resize: none !important;
+                overflow: hidden !important;
+                height: 10%;
+                width: 61%; /* 99% */
+                margin-left: 5px;
+                background-color: #46637f;
+            }
+            
+            .text-area::placeholder {
+                color: black;
+            }
+
+            .append-file {
+                position: relative;
+                cursor: pointer;
+                top: 4%;
+                left: 96%;
+            }
+        }
+    }
+    
+    #right {
+        width: 19%;
+        background-color: #161f27;
+        overflow: hidden;
+        overflow-y: scroll;
+    }
+}
+
+a {
+    color: #cfd9e4;
+    text-decoration: none;
+}
+
+a, button, div, input, select, span, strong, textarea {
+    outline: 0;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background: none;
+    box-shadow: none;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #a6a6a6;
+
+}
+
+h1 {
+    height: 5%;
+    padding-left: 10px;
+    font-size: 22px;
+    color: white;
+    padding-bottom: 10px;
+    border-bottom: 2px solid black;
+}
+
+h2 {
+    padding-top: 4px;
+    padding-left: 10px;
+    font-size: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.online {
+    font-size: .8em;
+    color: #4810f6;
+}
+
+.go-button {
+    font-size: 15px;
+    border: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0px;
+    margin-top: 3vh;
+
+    cursor: pointer;
+}
+
+h4 {
+    font-size: 14px;
+}
+
+@media only screen and (max-width: 860px) {
+    body {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 797px) {
+    .append-file {
+        left: 94%;
+    }
+}

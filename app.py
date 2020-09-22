@@ -1,5 +1,5 @@
 """
-    Made by: GiorgiR
+    Developed by: Giorgi Rakviashvili
 """
 
 from flask import Flask, send_from_directory, render_template, redirect, request, url_for, session
