@@ -176,7 +176,7 @@ body #center .input textarea::placeholder {
   color: black;
 }
 
-body #center .input .append-file {
+body #center .input svg {
   float: right;
   z-index: 2;
   position: relative;
