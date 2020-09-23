@@ -2,13 +2,11 @@
     bright grey:    #2e4153;
     dark grey:      #161f27;
 */
-/* --------------------------------------------------------- */
-/* BASIC SETUP */
-/* --------------------------------------------------------- */
 
 * {
     margin: 0;
     padding: 0;
+    color: #cfd9e4;
     box-sizing: border-box;
 }
 
@@ -21,78 +19,65 @@ html {
 body {
     height: 100hv;
     background-color: #1c2732;
-}
 
-a {
-    color: #cfd9e4;
-    text-decoration: none;
-}
+    form {
+        display: grid;
+        grid-template-columns: 90px 200px 30px;
+        grid-column-gap: 3px;
+        grid-row-gap: 4px;
 
-h3 {
-    font-size: 15px;
-}
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-70%, -70%);
+        /* margin-top: auto;
+        margin-bottom: auto; */
 
-.center {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-70%, -70%);
-    transform: translate(-70%, -70%);
-    color: #cfd9e4;
-    /* margin-top: auto;
-    margin-bottom: auto; */
-}
+        a {
+            text-decoration: none;
+            grid-area: 4 / 2;
+        }
 
-.textarea {
-    resize: none;
-}
+        h2 {
+            font-size: 20px;
+            grid-area: 1 / 1;
+            margin-bottom: 10px;
+        }
 
-.ggg {
-    display: grid;
-}
+        h3 {
+            font-size: 17px;
+            grid-column: 1;
+        }
 
-.title {
-    grid-row: 1;
-    grid-column: 1;
-    margin-bottom: 10px;
-}
+        .username {
+            grid-row: 2;
+            margin-top: 2px;
+        }
 
-.username {
-    grid-row: 2;
-    grid-column: 1;
-    margin-top: 2px;
-}
+        .password {
+            grid-row: 3;
+            margin-top: 4px;
+        }
 
-.password {
-    grid-row: 3;
-    grid-column: 1;
-    margin-top: 4px;
-}
+        input {
+            // margin-top: 8px;
+            resize: none;
+            color: black;
+            width: 200px;
+        }
 
-.e-name {
-    grid-row: 2;
-    grid-column: 2;
-}
+        button {
+            grid-area: 3 / 3;
+            margin-left: 8px;
+            color: #2e4153;
+        }
 
-.e-pass {
-    grid-row: 3;
-    grid-column: 2;
-}
+        .e-name {
+            grid-area: 2 / 2;
+        }
 
-.button {
-    grid-row: 3;
-    grid-column: 3;
-    margin-left: 8px;
-    width: 100%;
-    height: 4vh;
-    color: #2e4153;
-    /* background-color: #2e4153; */
-}
-
-.sign-up{
-    margin-top: 3px;
-    margin-left: 70%;
-    grid-row: 4;
-    grid-column: 2;
+        .e-pass {
+            grid-area: 3 / 2;
+        }
+    }
 }

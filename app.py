@@ -137,7 +137,7 @@ def login_to(username, password, sign=False):
                 socketio.emit('redirect', {'url': f'http://127.0.0.1:{port}/general/'})  # {'url': url_for('general')})
             else:
                 return redirect("/general/")
-    return "try again sucker - 000"
+    return "try again - 000"
 
 
 @app.route("/<input0>/", methods=["POST", "GET"])

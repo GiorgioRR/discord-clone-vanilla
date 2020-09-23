@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}" type="text/css">
     <title>safe chat</title>
 
 {% endblock %}
@@ -52,6 +52,7 @@
             </ul>
         </nav>
     </div>
+    
     <div id="center">
         <div id="top">
             <h1 id="category"># {{title.decode("utf-8")}}</h1>
@@ -59,7 +60,7 @@
         </div>
 
         <div id="chat-screen">
-            <div class="mmm">
+            <div>
                 <h4 class="author">author</h4>
                 <h4 class="message">message</h4>
                 <h4 class="date">date</h4>
