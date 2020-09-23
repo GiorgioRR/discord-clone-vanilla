@@ -4,13 +4,14 @@
 
 from flask import Flask, send_from_directory, render_template, redirect, request, url_for, session
 from flask_caching import Cache
-from flask_sqlalchemy import SQLAlchemy
 
 from flask_socketio import SocketIO
 
 import os
 from datetime import datetime
 from alphabet_detector import AlphabetDetector
+
+from models import db, User, Message
 
 port = 5000
 current  = f"{os.getcwd()}\\"
@@ -38,60 +39,16 @@ app = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
 app.config.from_mapping(config)
 app.config["SECRET_KEY"]              = "$fdvnjDFE&*)EEDN@d.0("
 app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DATABASE}"
-db = SQLAlchemy(app)
 
 cache.init_app(app, config={'CACHE_TYPE': 'simple'})
+
+db.init_app(app)
 
 clients, clients_w  = [], {}
 socketio = SocketIO(app)
 
 ad = AlphabetDetector()
 status = {}
-
-
-class User(db.Model):
-    id       = db.Column(db.Integer,    primary_key=True)
-    username = db.Column(db.String(20), nullable=False, unique=True)
-    password = db.Column(db.String(15), nullable=False)
-    ip       = db.Column(db.String(40), nullable=False)
-    remember = db.Column(db.Integer,    nullable=False, default=0)
-    # status = db.Column(db.Integer,    nullable=False, default=0)
-    role     = db.Column(db.String(10), nullable=False, default="nobody")
-
-    messages = db.relationship("Message", backref="author", lazy=True)
-    # user1 = User("kommando", "123", "", "admin")
-    def __repr__(self):
-        return f"User('{self.username}', '{self.ip}', '{self.role}')"
-
-    def __init__(self, username, password, ip="", role="nobody", remember=0):  # status=0, xp=0
-        self.username = username
-        self.password = password
-        self.ip       = ip
-        self.role     = role
-        self.remember = remember
-        # self.status   = status
-        # self.xp       = xp
-
-
-class Message(db.Model):
-    # post = Message(category="General", username="kommando", message="suck me", user_id=User.query.get(1).id)
-    id       = db.Column(db.Integer,    primary_key=True)
-    category = db.Column(db.Text,       nullable=False)
-    username = db.Column(db.String(15), nullable=False)
-    message  = db.Column(db.Text,       nullable=False)
-    date     = db.Column(db.Text,       nullable=False, default=datetime.now().strftime('%m-%d %H:%M'))  # db.Date
-    # "{:%d-%b-%Y %H:%M}".format(datetime.now())
-    user_id  = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-    def __repr__(self):
-        return f"Message('{self.username}', '{self.date}', '{self.category}', '{self.message}')"
-
-    def __init__(self, category, username, message, user_id):
-        self.category = category
-        self.username = username
-        self.message  = message
-        # self.date     = date
-        self.user_id  = user_id
 
 
 @app.route("/home/", methods=["POST", "GET"])
@@ -365,9 +322,17 @@ def save_message(json):
     send_all('m_s_o', json)
 
 
+def initdb():
+    db.drop_all()
+    db.create_all()
+    db.session.commit()
+
+
 def main():
     for user in User.query.all():
         status[user.ip] = 0
+
+    # initdb()  # not needed for a testing mode
 
     socketio.run(app, debug=True)
     # app.run(debug=True)  # debug=True, host="169.254.110.104", port=5010
