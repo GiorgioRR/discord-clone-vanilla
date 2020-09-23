@@ -46,7 +46,7 @@ db = SQLAlchemy(app)
 
 cache.init_app(app, config={'CACHE_TYPE': 'simple'})
 
-clients, clients_w  = [], {}
+clients, clients_w  = [], {}  # [ips, num_of_connections]
 socketio = SocketIO(app)
 
 ad = AlphabetDetector()
@@ -238,12 +238,6 @@ def admin():
 #                               "favicon.ico", mimetype="image/vnd.microsoft.icon")
 
 
-def put_online(ip):
-    status[ip] = 1
-    # User.query.filter_by(ip=ip).first().status = 1
-    # db.session.commit()
-
-
 def remember(ip: str, name=None) -> bool:
     if name:
         pass
@@ -265,14 +259,14 @@ def register(username, password):
 def handle_my_custom_event(json, methods=["POST", "GET"]):
     ip = session.get("ip_address")
 
+    #print(clients_w[ip])
     if ip in clients_w:
-        clients_w[ip] = clients_w[ip] + 1
-        if clients_w[ip] <= 0:
-            clients_w[ip] = 1
+        clients_w[ip] += 1
     else:
         clients_w[ip] = 1
+    print(clients_w[ip])
+    status[ip] = 1
 
-    put_online(ip)
     clients.append((ip, request.sid))
     print(f"received my event \"{ip}\": {str(json)}")
     #       received my event: {'user_name': 'kommando', 'data': 'User Connected'}
@@ -284,20 +278,16 @@ def handle_my_custom_event(json, methods=["POST", "GET"]):
 @socketio.on("disconnect")
 def diconnect_user():
     ip = session.get("ip_address")
-    print(f"user disconnected {ip}")
-    print("!!!!!!!!!!!!!!!!!!!!! ", clients_w)
+    print(f"user disconnected {ip}\n {clients_w}")
 
+    print(clients_w[ip])
     try:
         clients_w[ip] = clients_w[ip] - 1
     except KeyError:
         print("some problems over here")
+    print(clients_w[ip])
 
     status[ip] = 0
-    #status = User.query.filter_by(ip=ip).first().status
-    #if status == 0:
-    #    # name = session.get("username")
-    #    status = 0
-    #    db.session.commit()
 
     json = load_users()
     send_all("connect/disconnect", json)
@@ -305,6 +295,12 @@ def diconnect_user():
 
 @socketio.on("voice")
 def voice_chat(json, methods=["POST", "GET"]):
+    """
+    this is not functionable at the moment
+    :param json:
+    :param methods:
+    :return:
+    """
     cat = json["category"]
     print(cat)
     if cat in v_cat:
@@ -342,9 +338,7 @@ def handle_incoming_messages(json, methods=["POST", "GET"]):
 def send_all(first, json):  # category, json-message
     global clients
     clients = list(set(clients))
-    for client in clients:
-        # if client[0]["user_name"] != user:
-        print(client)
+    for client in clients:  # if client[0]["user_name"] != user:
         socketio.emit(first, json, room=client[1])
 
 
@@ -379,7 +373,7 @@ def init_db():
 def main():
     for user in User.query.all():
         status[user.ip] = 0
-    # initdb()  # not needed for a testing mode
+    # init_db()  # not needed for a testing mode
 
     socketio.run(app, debug=True)  # app.run(debug=True)  # debug=True, host="169.254.110.104", port=5010
 
