@@ -361,9 +361,9 @@ def init_db():
 
 
 def main():
-    for user in User.query.all():
-        status[user.ip] = False
-    # init_db()  # not needed for a testing mode
+    # for user in User.query.all():
+    #     status[user.ip] = False
+    init_db()  # not needed for a testing mode
 
     socketio.run(app, debug=True)  # app.run(debug=True)  # debug=True, host="169.254.110.104", port=5010
 
