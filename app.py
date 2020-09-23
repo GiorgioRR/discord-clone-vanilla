@@ -365,9 +365,13 @@ def save_message(json):
     send_all('m_s_o', json)
 
 
-if __name__ == "__main__":
+def main():
     for user in User.query.all():
         status[user.ip] = 0
 
     socketio.run(app, debug=True)
     # app.run(debug=True)  # debug=True, host="169.254.110.104", port=5010
+
+
+if __name__ == "__main__":
+    main()

@@ -18,27 +18,26 @@ function append_message (t_author, t_message, t_date, v_category){
         try {
             // Try to convert to utf-8
             // If the conversion succeeds, text is not utf-8
-            var t_message = decodeURIComponent(escape(t_message));
+            t_message = decodeURIComponent(escape(t_message));
         }catch(e) {
             // console.log(e.message); // URI malformed
             // This exception means text is utf-8
         }
 
-        // console.log(typeof(t_message));
-        var t_message = urlify(t_message); // ავღნიშნოთ <a>-თი ლინკები
-        var message = "";
+        t_message = urlify(t_message); // append links to <a></a> 
+        let message = "";
 
-        var lines = t_message.split("\n");
+        let lines = t_message.split("\n");
         for (i = 0; i < lines.length; i++) {
-            var links = lines[i].split('</a12>');
-            var length = links.length;  // 0
+            let links = lines[i].split('</a12>');
+            let length = links.length;  // 0
             if (length > 1){
                 for (i = 0; i < length; i++) {
-                    var text_l = links[i];
+                    let text_l = links[i];
                     if (i % 2 == 1) {
-                        var a_html = `<a href="#{text_l}", target="_blank">${text_l}</a>`;
+                        let a_html = `<a href="${text_l}", target="_blank">${text_l}</a>`;
 
-                        message += a;
+                        message += a_html;
                     }
                     else {
                         message += text_l;
@@ -51,7 +50,7 @@ function append_message (t_author, t_message, t_date, v_category){
             message += "</br>";
         }
 
-        var html = `
+        let html = `
         <div class="mmm">
             <h4 class="author">${t_author}</h4>
             <h4 class="message">${message}</h4>
@@ -62,7 +61,6 @@ function append_message (t_author, t_message, t_date, v_category){
     }
     else {
         new_message(v_category);
-    // document.getElementById("text-area").value = "";
     }
 }
 
@@ -89,9 +87,9 @@ function status_bar ( data ){
         right.removeChild(right.firstChild);
     }
 
-    const parsed = JSON.parse(JSON.stringify(data));
+    let parsed = JSON.parse(JSON.stringify(data));
     
-    var s_html = `<h2>ADMIN - ${parsed.num_of_users[0]}</h2>`;
+    let s_html = `<h2>ADMIN - ${parsed.num_of_users[0]}</h2>`;
     for (i=0; i < parsed.admins.length; i++) {
         s_html += `<h2 class="online">--- ${parsed.admins[i]}</h2>`;
     }
@@ -120,7 +118,7 @@ function send_message (){
     if (user_input != ""){
         var user_name   = document.getElementById("user").textContent;
         var vv_category = document.getElementById("category").textContent;
-    
+
         socket.emit( 'message', {
             user_name : user_name,
             category: vv_category,
@@ -138,19 +136,20 @@ function send_data (data){
 
 
 function main (){
-    var entry_t = document.getElementById("text-area");
-    entry_t.addEventListener("keypress", function (e) {  // bind shift+enter to send a message
-        if (e.keyCode == 13 && e.shiftKey) {
-            // pass - this does what it is supposed to do
-        }
-        else if (e.keyCode == 13) {
+    let entry_t = document.getElementById("text-area");
+
+    entry_t.addEventListener('keydown', function(e) {
+        const keyCode = e.which || e.keyCode;  // Get the code of pressed key
+
+        if (keyCode === 13 && !e.shiftKey) {  // 13 represents the Enter key
+            // Don't generate a new line
             send_message();
             entry_t.value = "";
+            e.preventDefault();
         }
-    }
-    );
+    });
 
-    var user_na  = document.getElementById("user").textContent;
+    let user_na  = document.getElementById("user").textContent;
 
     socket.on( 'connect', function() {
         socket.emit( 'joined', {
@@ -175,5 +174,6 @@ function main (){
 }
 
 
-// console.log(`http://${document.domain}:${location.port}`);
-var socket = io.connect(`http://${document.domain}:${location.port}`);
+var domain = `http://${document.domain}:${location.port}`;
+var socket = io.connect(domain);
+console.log(domain);
