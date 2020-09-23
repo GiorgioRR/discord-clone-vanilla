@@ -127,7 +127,7 @@ body #center #chat-screen div {
 }
 
 body #center #chat-screen div .author {
-  min-width: 12%;
+  min-width: 13%;
   margin-left: 4px;
   vertical-align: top;
   /* text-align: left; */
@@ -227,6 +227,21 @@ h2 {
 @media screen and (max-width: 860px) {
   body {
     font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  body #left {
+    display: none !important;
+  }
+  body #right {
+    display: none !important;
+  }
+  body #center {
+    width: 100vw;
+  }
+  body #center .input textarea {
+    width: 99vw;
   }
 }
 /*# sourceMappingURL=main.css.map */
