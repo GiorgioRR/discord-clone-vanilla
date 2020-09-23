@@ -44,7 +44,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DATABASE}"
 
 db = SQLAlchemy(app)
 
-# cache.init_app(app, config={'CACHE_TYPE': 'simple'})
+cache.init_app(app, config={'CACHE_TYPE': 'simple'})
 
 clients, clients_w  = [], {}
 socketio = SocketIO(app)
@@ -290,7 +290,7 @@ def diconnect_user():
     try:
         clients_w[ip] = clients_w[ip] - 1
     except KeyError:
-        print("ffffffffffffffffffffuuuuuuuuuuuuuuuuuuuuuucccccccccccccccccccccccccccccckkkkkkkkkkkkkkkkk")
+        print("some problems over here")
 
     status[ip] = 0
     #status = User.query.filter_by(ip=ip).first().status
@@ -370,7 +370,7 @@ def save_message(json):
     send_all('m_s_o', json)
 
 
-def initdb():
+def init_db():
     db.drop_all()
     db.create_all()
     db.session.commit()
@@ -379,11 +379,9 @@ def initdb():
 def main():
     for user in User.query.all():
         status[user.ip] = 0
-
     # initdb()  # not needed for a testing mode
 
-    socketio.run(app, debug=True)
-    # app.run(debug=True)  # debug=True, host="169.254.110.104", port=5010
+    socketio.run(app, debug=True)  # app.run(debug=True)  # debug=True, host="169.254.110.104", port=5010
 
 
 if __name__ == "__main__":
