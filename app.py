@@ -197,7 +197,7 @@ def exit_user():
     ip_address = session["ip_address"]
 
     User.query.filter_by(ip=ip_address).first().remember = 0
-    status[ip_address] = 0  # User.query.filter_by(ip=ip_address).first().status = 0
+    status[ip_address] = False  # User.query.filter_by(ip=ip_address).first().status = 0
     db.session.commit()
     clients_w[ip_address] = 0
 
@@ -259,20 +259,16 @@ def register(username, password):
 def handle_my_custom_event(json, methods=["POST", "GET"]):
     ip = session.get("ip_address")
 
-    #print(clients_w[ip])
+    status[ip] = True
+    clients.append((ip, request.sid))
+
     if ip in clients_w:
         clients_w[ip] += 1
     else:
         clients_w[ip] = 1
-    print(clients_w[ip])
-    status[ip] = 1
 
-    clients.append((ip, request.sid))
-    print(f"received my event \"{ip}\": {str(json)}")
-    #       received my event: {'user_name': 'kommando', 'data': 'User Connected'}
-    json = load_users()
-    send_all("connect/disconnect", json)
-    print(clients_w)
+    socketio.emit("connect/disconnect", load_users(), room=request.sid)
+    print(f"received my event \"{ip}\": {str(json)}")  # {'user_name': 'kommando', 'data': 'User Connected'}
 
 
 @socketio.on("disconnect")
@@ -280,17 +276,11 @@ def diconnect_user():
     ip = session.get("ip_address")
     print(f"user disconnected {ip}\n {clients_w}")
 
-    print(clients_w[ip])
-    try:
-        clients_w[ip] = clients_w[ip] - 1
-    except KeyError:
-        print("some problems over here")
-    print(clients_w[ip])
+    clients_w[ip] -= 1
+    if clients_w == 0:
+        status[ip] = False
 
-    status[ip] = 0
-
-    json = load_users()
-    send_all("connect/disconnect", json)
+    send_all("connect/disconnect", load_users())
 
 
 @socketio.on("voice")
@@ -311,7 +301,7 @@ def load_users():
     admins, moderators, others, offliners = [], [], [], []
 
     for i in User.query.all():
-        if status[i.ip] == 0:
+        if not status[i.ip]:
             offliners.append(i.username)
             continue
 
@@ -372,7 +362,7 @@ def init_db():
 
 def main():
     for user in User.query.all():
-        status[user.ip] = 0
+        status[user.ip] = False
     # init_db()  # not needed for a testing mode
 
     socketio.run(app, debug=True)  # app.run(debug=True)  # debug=True, host="169.254.110.104", port=5010
