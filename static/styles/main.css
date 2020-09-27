@@ -67,6 +67,11 @@ body #left nav ul li {
   font-size: 1em;
 }
 
+body #left nav ul li a:hover,
+body #left nav ul li a:active {
+  color: white;
+}
+
 body #center {
   width: 62%;
   background-color: #2e4153;
@@ -83,8 +88,7 @@ body #center #top {
   height: 6vh;
 }
 
-body #center #top #category,
-body #center #top #log_out {
+body #center #top h1 {
   font-size: 1.1em;
   border-bottom: 0px;
 }
@@ -93,14 +97,8 @@ body #center #top #log_out {
   padding-right: 4px;
 }
 
-body #center #top .log_out:link,
-body #center #top .log_out:visited {
-  top: 1%;
-}
-
-body #center #top .log_out:hover,
-body #center #top .log_out:active {
-  background-color: black;
+body #center #top #log_out a:hover,
+body #center #top #log_out a:active {
   color: white;
 }
 

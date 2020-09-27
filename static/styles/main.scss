@@ -55,6 +55,11 @@ body {
 
             li {
                 font-size: 1em;  // font: 14px Lato, Arial, Sans-Serif;
+
+                a:hover,
+                a:active {
+                    color: white;
+                }
             }
         }
     }
@@ -68,26 +73,20 @@ body {
             display: flex;
             justify-content: space-between;
             height: 6vh;
-            
-            #category,
-            #log_out {
+
+            h1 {
                 font-size: 1.1em;
                 border-bottom: 0px;
             }
 
             #log_out {
                 padding-right: 4px;
-            }
-            
-            .log_out:link,
-            .log_out:visited {
-                top: 1%;
-            }
 
-            .log_out:hover,
-            .log_out:active {
-                background-color: black;
-                color: white;
+                a:hover,
+                a:active {
+                    // background-color: black;
+                    color: white;
+                }
             }
         }
 
