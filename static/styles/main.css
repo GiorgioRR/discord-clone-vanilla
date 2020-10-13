@@ -42,6 +42,22 @@ body a {
   text-decoration: none;
 }
 
+body h1 {
+  height: 5%;
+  padding-left: 10px;
+  font-size: 22px;
+  color: white;
+  padding-bottom: 10px;
+  border-bottom: 2px solid black;
+}
+
+body h2 {
+  padding-top: 4px;
+  padding-left: 10px;
+  font-size: 15px;
+  border-bottom: 1px solid #ccc;
+}
+
 body div {
   height: 100vh;
   color: #cfd9e4;
@@ -193,6 +209,11 @@ body #right {
   overflow-y: scroll;
 }
 
+body #right .online {
+  font-size: .8em;
+  color: #4810f6;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   background: none;
@@ -203,27 +224,6 @@ body #right {
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #a6a6a6;
-}
-
-h1 {
-  height: 5%;
-  padding-left: 10px;
-  font-size: 22px;
-  color: white;
-  padding-bottom: 10px;
-  border-bottom: 2px solid black;
-}
-
-h2 {
-  padding-top: 4px;
-  padding-left: 10px;
-  font-size: 15px;
-  border-bottom: 1px solid #ccc;
-}
-
-.online {
-  font-size: .8em;
-  color: #4810f6;
 }
 
 @media screen and (max-width: 860px) {

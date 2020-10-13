@@ -12,6 +12,8 @@ import os
 from datetime import datetime
 from alphabet_detector import AlphabetDetector
 
+import pymongo
+
 # from shared.db import db
 # from models import User, Message
 
@@ -40,9 +42,6 @@ cache = Cache(config={'CACHE_TYPE': 'simple'})
 app = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
 app.config.from_mapping(config)
 app.config["SECRET_KEY"]              = "$fdvnjDFE&*)EEDN@d.0("
-app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DATABASE}"
-
-db = SQLAlchemy(app)
 
 cache.init_app(app, config={'CACHE_TYPE': 'simple'})
 
@@ -145,10 +144,10 @@ def login_to(username, password, sign=False):
     return "try again - 000"
 
 
-@app.route("/<input0>/", methods=["POST", "GET"])
-# @cache.cached(timeout=50, key_prefix="all_categories")
+@app.route("/<category>/", methods=["POST", "GET"])
+# @cache.cached(category=50, key_prefix="all_categories")
 def find_page(input0):
-    if input0 in categories:
+    if category in categories:
         # Todo: get user name
         if "ip_address" in session:
             ip_address = session["ip_address"]
@@ -156,27 +155,27 @@ def find_page(input0):
             ip_address = request.remote_addr
 
         username = User.query.filter_by(ip=ip_address).first().username
-        session["username"], session["category"] = username, input0
+        session["username"], session["category"] = username, category
 
         ips = [user.ip for user in User.query.all()]
         ip_address = request.remote_addr
 
         if ip_address in ips and remember(ip_address):
-            mm = Message.query.filter_by(category=input0)
+            mm = Message.query.filter_by(category=category)
 
-            if ad.only_alphabet_chars(input0, "Latin"):
-                input0 = input0.capitalize()
+            if ad.only_alphabet_chars(category, "Latin"):
+                category = category.capitalize()
 
-            return render_template("index.html", user_name=username, title=input0.encode("utf-8"), messages=mm)
+            return render_template("index.html", user_name=username, title=category.encode("utf-8"), messages=mm)
         # num_of_users=num_of_users,
         # num_of_offliners=len(offliners),
         # online=online,
         # offline=offliners,
         else:
-            return redirect("/login/")  # f"<h1>fuck u bitch...\nlick my \"{input0}\" ass<h2>"
-    # Todo: error page
+            return redirect("/login/")  # f"<h1>fuck u bitch...\nlick my \"{category}\" ass<h2>"
     else:
-        return f"<h1>404 - Page \"{input0}\" not found<h2>"
+        # Todo: error page
+        return f"<h1>404 - Page \"{category}\" not found<h2>"
 
 
 @app.route("/login/", methods=["POST", "GET"])
@@ -360,10 +359,48 @@ def init_db():
     db.session.commit()
 
 
+def db_sqlite():
+    global db
+
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DATABASE}"
+    db = SQLAlchemy(app)
+
+
+def db_mongo():
+    link = input("db address: ")
+
+    try:
+        my_client = pymongo.MongoClient(link)
+        my_client.server_info()
+
+        my_db = my_client["discord"]
+        users = my_db["users"]
+        messages = my_db["messages"]
+    except pymongo.errors.DuplicateKeyError:
+        db_mongo()
+
+
+def db_choose():
+    info = '''
+    [m]ongoDB
+    [S]QLite
+    Choose your db (m or s): 
+    '''
+
+    db = input(info).strip().lower()
+
+    if db == "m":
+        db_mongo()
+    elif db == "s":
+        init_db()  # comment out for a testing mode
+
+        db_sqlite()
+    else:
+        db_choose()
+
+
 def main():
-    # for user in User.query.all():
-    #     status[user.ip] = False
-    init_db()  # not needed for a testing mode
+    db_choose()  # choose a db type
 
     socketio.run(app, debug=True)  # app.run(debug=True)  # debug=True, host="169.254.110.104", port=5010
 

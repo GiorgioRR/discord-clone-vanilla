@@ -34,6 +34,22 @@ body {
         text-decoration: none;
     }
 
+    h1 {
+        height: 5%;
+        padding-left: 10px;
+        font-size: 22px;
+        color: white;
+        padding-bottom: 10px;
+        border-bottom: 2px solid black;
+    }
+    
+    h2 {
+        padding-top: 4px;
+        padding-left: 10px;
+        font-size: 15px;
+        border-bottom: 1px solid #ccc;
+    }
+    
     div {
         height: 100vh;
         color: #cfd9e4;
@@ -138,10 +154,10 @@ body {
                 margin-left: .4vw;
                 background-color: #46637f;
                 z-index: 1;
-            }
-            
-            textarea::placeholder {
-                color: black;
+
+                &::placeholder {
+                    color: black;
+                }
             }
 
             svg {
@@ -159,6 +175,11 @@ body {
         background-color: #161f27;
         overflow: hidden;
         overflow-y: scroll;
+
+        .online {
+            font-size: .8em;
+            color: #4810f6;
+        }
     }
 }
 
@@ -171,27 +192,6 @@ body {
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: #a6a6a6;
-}
-
-h1 {
-    height: 5%;
-    padding-left: 10px;
-    font-size: 22px;
-    color: white;
-    padding-bottom: 10px;
-    border-bottom: 2px solid black;
-}
-
-h2 {
-    padding-top: 4px;
-    padding-left: 10px;
-    font-size: 15px;
-    border-bottom: 1px solid #ccc;
-}
-
-.online {
-    font-size: .8em;
-    color: #4810f6;
 }
 
 @media screen and (max-width: 860px) {
