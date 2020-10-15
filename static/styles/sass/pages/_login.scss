@@ -1,25 +1,6 @@
-/*
-    bright grey:    #2e4153;
-    dark grey:      #161f27;
-*/
-
-* {
-    margin: 0;
-    padding: 0;
-    color: #cfd9e4;
-    box-sizing: border-box;
-}
-
-html {
-    font-family: "Lato", "Arial", sans-serif;
-    font-size: 20px;
-    text-rendering: optimizeLegibility;
-}
+// File: login.scss
 
 body {
-    height: 100hv;
-    background-color: #1c2732;
-
     form {
         display: grid;
         grid-template-columns: 90px 200px 30px;

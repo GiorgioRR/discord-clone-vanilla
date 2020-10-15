@@ -1,4 +1,6 @@
-/* sass --watch root/css/sass:root/css/output
+/* 
+sass --watch .\static\styles\sass\main.scss:.\static\styles\css\main.scss
+
     white:          #fff;
     gwhite:         #cfd9e4
     bright grey:    #2e4153;
@@ -8,8 +10,7 @@
   margin: 0;
   padding: 0;
   outline: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html, body {
@@ -18,8 +19,6 @@ html, body {
 }
 
 html {
-  background-color: #fff;
-  color: #3c3c3c;
   font-family: "Lato", "Arial", sans-serif;
   font-size: 20px;
   text-rendering: optimizeLegibility;
@@ -27,21 +26,118 @@ html {
 }
 
 body {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   background-color: #1c2732;
-  font-size: 20px;
 }
 
+body form {
+  display: grid;
+  grid-template-columns: 90px 200px 30px;
+  grid-column-gap: 3px;
+  grid-row-gap: 4px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-70%, -70%);
+  /* margin-top: auto;
+  margin-bottom: auto; */
+}
+body form a {
+  text-decoration: none;
+  grid-area: 4/2;
+}
+body form h2 {
+  font-size: 20px;
+  grid-area: 1/1;
+  margin-bottom: 10px;
+}
+body form h3 {
+  font-size: 17px;
+  grid-column: 1;
+}
+body form .username {
+  grid-row: 2;
+  margin-top: 2px;
+}
+body form .password {
+  grid-row: 3;
+  margin-top: 4px;
+}
+body form input {
+  resize: none;
+  color: black;
+  width: 200px;
+}
+body form button {
+  grid-area: 3/3;
+  margin-left: 8px;
+  color: #2e4153;
+}
+body form .e-name {
+  grid-area: 2/2;
+}
+body form .e-pass {
+  grid-area: 3/2;
+}
+
+body div {
+  display: grid;
+  grid-row-gap: 1.4px;
+  grid-column-gap: 2px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-70%, -70%);
+  color: #cfd9e4;
+  /* margin-top: auto;
+  margin-bottom: auto; */
+}
+body div h2 {
+  grid-area: 1/1;
+  margin-bottom: 10px;
+}
+body div h3 {
+  font-size: 16px;
+  margin-top: 2px;
+  padding-top: 4px;
+}
+body div input {
+  resize: none;
+  height: 25px;
+}
+body div button {
+  grid-area: 4/3;
+  margin-left: 8px;
+  width: 25px;
+  height: 4vh;
+  color: #2e4153;
+}
+body div .username {
+  grid-area: 2/1;
+}
+body div .password00 {
+  grid-area: 3/1;
+}
+body div .password01 {
+  grid-area: 4/1;
+}
+body div .e-name {
+  grid-area: 2/2;
+}
+body div .pass0 {
+  grid-area: 3/2;
+}
+body div .pass1 {
+  grid-area: 4/2;
+}
+
+body {
+  display: flex;
+  justify-content: space-between;
+}
 body a {
   color: #cfd9e4;
   text-decoration: none;
 }
-
 body h1 {
   height: 5%;
   padding-left: 10px;
@@ -50,19 +146,16 @@ body h1 {
   padding-bottom: 10px;
   border-bottom: 2px solid black;
 }
-
 body h2 {
   padding-top: 4px;
   padding-left: 10px;
   font-size: 15px;
   border-bottom: 1px solid #ccc;
 }
-
 body div {
   height: 100vh;
   color: #cfd9e4;
 }
-
 body #left {
   width: 18vw;
   background-color: #161f27;
@@ -70,54 +163,40 @@ body #left {
   overflow: hidden;
   overflow-y: scroll;
 }
-
 body #left #user {
   font-size: 1.1em;
 }
-
 body #left nav ul {
   list-style: none;
 }
-
 body #left nav ul li {
   font-size: 1em;
 }
-
 body #left nav ul li a:hover,
 body #left nav ul li a:active {
   color: white;
 }
-
 body #center {
   width: 62%;
   background-color: #2e4153;
   padding: 1px;
 }
-
 body #center #top {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   height: 6vh;
 }
-
 body #center #top h1 {
   font-size: 1.1em;
   border-bottom: 0px;
 }
-
 body #center #top #log_out {
   padding-right: 4px;
 }
-
 body #center #top #log_out a:hover,
 body #center #top #log_out a:active {
   color: white;
 }
-
 body #center #chat-screen {
   margin: 5px;
   height: 81vh;
@@ -126,45 +205,31 @@ body #center #chat-screen {
   overflow: hidden;
   overflow-y: scroll;
 }
-
 body #center #chat-screen div {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   font-size: 14px;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
+  justify-content: space-between;
   height: fit-content;
 }
-
 body #center #chat-screen div .author {
   min-width: 13%;
   margin-left: 4px;
   vertical-align: top;
   /* text-align: left; */
 }
-
 body #center #chat-screen div .message {
   width: 75%;
   margin-left: 4px;
   vertical-align: top;
 }
-
 body #center #chat-screen div .date {
   width: 10%;
   vertical-align: top;
   text-align: right;
 }
-
 body #center .input {
-  height: -webkit-fit-content !important;
-  height: -moz-fit-content !important;
   height: fit-content !important;
 }
-
 body #center .input textarea {
   position: absolute;
   float: left;
@@ -173,52 +238,35 @@ body #center .input textarea {
   height: 5.4vw;
   width: 61.2vw;
   /* 99% */
-  margin-left: .4vw;
+  margin-left: 0.4vw;
   background-color: #46637f;
   z-index: 1;
 }
-
-body #center .input textarea::-webkit-input-placeholder {
-  color: black;
-}
-
-body #center .input textarea:-ms-input-placeholder {
-  color: black;
-}
-
-body #center .input textarea::-ms-input-placeholder {
-  color: black;
-}
-
 body #center .input textarea::placeholder {
   color: black;
 }
-
 body #center .input svg {
   float: right;
   z-index: 2;
   position: relative;
   cursor: pointer;
-  margin-right: .4vw;
+  margin-right: 0.4vw;
 }
-
 body #right {
   width: 19vw;
   background-color: #161f27;
   overflow: hidden;
   overflow-y: scroll;
 }
-
 body #right .online {
-  font-size: .8em;
+  font-size: 0.8em;
   color: #4810f6;
 }
 
 ::-webkit-scrollbar {
   width: 10px;
   background: none;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -231,7 +279,6 @@ body #right .online {
     font-size: 15px;
   }
 }
-
 @media screen and (max-width: 620px) {
   body #left {
     display: none !important;
@@ -246,4 +293,5 @@ body #right .online {
     width: 99vw;
   }
 }
+
 /*# sourceMappingURL=main.css.map */

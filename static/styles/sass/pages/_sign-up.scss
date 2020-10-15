@@ -1,19 +1,6 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    font-family: "Lato", "Arial", sans-serif;
-    font-size: 20px;
-    text-rendering: optimizeLegibility;
-}
+// File: sign-up.scss
 
 body {
-    height: 100hv;
-    background-color: #1c2732;
-
     div {
         display: grid;
         grid-row-gap: 1.4px;
