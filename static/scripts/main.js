@@ -128,13 +128,6 @@ function send_message (){
 }
 
 
-function send_data (data){
-    socket.emit( 'voice', {
-        category: data
-    })
-}
-
-
 function main (){
     let entry_t = document.getElementById("text-area");
 

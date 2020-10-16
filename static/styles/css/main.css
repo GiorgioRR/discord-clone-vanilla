@@ -1,7 +1,7 @@
 /* 
-sass --watch .\static\styles\sass\main.scss:.\static\styles\css\main.css
-sass --watch .\static\styles\sass\pages\login.scss:.\static\styles\css\login.css
-sass --watch .\static\styles\sass\pages\sign-up.scss:.\static\styles\css\sign-up.css
+sass --watch .\static\styles\sass\_main.scss:.\static\styles\css\main.css
+sass --watch .\static\styles\sass\pages\_login.scss:.\static\styles\css\login.css
+sass --watch .\static\styles\sass\pages\_sign-up.scss:.\static\styles\css\sign-up.css
 
     white:          #fff;
     gwhite:         #cfd9e4
@@ -136,7 +136,7 @@ body #center .input textarea {
   float: left;
   resize: none !important;
   overflow: hidden !important;
-  height: 5.4vw;
+  height: 11vh;
   width: 61.2vw;
   /* 99% */
   margin-left: 0.4vw;

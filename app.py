@@ -25,7 +25,6 @@ categories = ["welcome", "announcements", "rules", "whoami", "general", "ლი�
               "coding-challenges", "movies-n-books", "hacking-penetration-forensics-ctf", "multiplayer-games",
               "good-stuff", "tldr", "memes", "python", "c-cpp", "java", "front-end", "database-languages", "el-general",
               "radio-circuits", "bot-spam", "music", "git", "github-notifs", "root"]
-v_cat      = ["v-general", "v-funker"]
 
 config = {
     "DEBUG": True,          # some Flask specific configs
