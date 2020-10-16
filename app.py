@@ -34,8 +34,7 @@ config = {
 }
 
 TEMPLATES_DIR = os.path.abspath("templates")
-STATIC_DIR    = os.path.abspath("static")
-# print(TEMPLATES_DIR, "\n", STATIC_DIR)
+STATIC_DIR    = os.path.abspath("static")  # print(TEMPLATES_DIR, "\n", STATIC_DIR)
 
 cache = Cache(config={'CACHE_TYPE': 'simple'})
 
@@ -50,6 +49,9 @@ socketio = SocketIO(app)
 
 ad = AlphabetDetector()
 status = {}
+
+app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DATABASE}"
+db = SQLAlchemy(app)
 
 
 class User(db.Model):
@@ -73,8 +75,6 @@ class User(db.Model):
         self.ip       = ip
         self.role     = role
         self.remember = remember
-        # self.status   = status
-        # self.xp       = xp
 
 
 class Message(db.Model):
@@ -146,7 +146,7 @@ def login_to(username, password, sign=False):
 
 @app.route("/<category>/", methods=["POST", "GET"])
 # @cache.cached(category=50, key_prefix="all_categories")
-def find_page(input0):
+def find_page(category):
     if category in categories:
         # Todo: get user name
         if "ip_address" in session:
@@ -387,7 +387,7 @@ def db_choose():
     Choose your db (m or s): 
     '''
 
-    db = input(info).strip().lower()
+    db = "s"  # input(info).strip().lower()
 
     if db == "m":
         db_mongo()
@@ -400,7 +400,7 @@ def db_choose():
 
 
 def main():
-    db_choose()  # choose a db type
+    # db_choose()  # choose a db type
 
     socketio.run(app, debug=True)  # app.run(debug=True)  # debug=True, host="169.254.110.104", port=5010
 

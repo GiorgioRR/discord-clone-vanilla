@@ -1,5 +1,7 @@
 /* 
-sass --watch .\static\styles\sass\main.scss:.\static\styles\css\main.scss
+sass --watch .\static\styles\sass\main.scss:.\static\styles\css\main.css
+sass --watch .\static\styles\sass\pages\login.scss:.\static\styles\css\login.css
+sass --watch .\static\styles\sass\pages\sign-up.scss:.\static\styles\css\sign-up.css
 
     white:          #fff;
     gwhite:         #cfd9e4
@@ -27,107 +29,6 @@ html {
 
 body {
   background-color: #1c2732;
-}
-
-body form {
-  display: grid;
-  grid-template-columns: 90px 200px 30px;
-  grid-column-gap: 3px;
-  grid-row-gap: 4px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-70%, -70%);
-  /* margin-top: auto;
-  margin-bottom: auto; */
-}
-body form a {
-  text-decoration: none;
-  grid-area: 4/2;
-}
-body form h2 {
-  font-size: 20px;
-  grid-area: 1/1;
-  margin-bottom: 10px;
-}
-body form h3 {
-  font-size: 17px;
-  grid-column: 1;
-}
-body form .username {
-  grid-row: 2;
-  margin-top: 2px;
-}
-body form .password {
-  grid-row: 3;
-  margin-top: 4px;
-}
-body form input {
-  resize: none;
-  color: black;
-  width: 200px;
-}
-body form button {
-  grid-area: 3/3;
-  margin-left: 8px;
-  color: #2e4153;
-}
-body form .e-name {
-  grid-area: 2/2;
-}
-body form .e-pass {
-  grid-area: 3/2;
-}
-
-body div {
-  display: grid;
-  grid-row-gap: 1.4px;
-  grid-column-gap: 2px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-70%, -70%);
-  color: #cfd9e4;
-  /* margin-top: auto;
-  margin-bottom: auto; */
-}
-body div h2 {
-  grid-area: 1/1;
-  margin-bottom: 10px;
-}
-body div h3 {
-  font-size: 16px;
-  margin-top: 2px;
-  padding-top: 4px;
-}
-body div input {
-  resize: none;
-  height: 25px;
-}
-body div button {
-  grid-area: 4/3;
-  margin-left: 8px;
-  width: 25px;
-  height: 4vh;
-  color: #2e4153;
-}
-body div .username {
-  grid-area: 2/1;
-}
-body div .password00 {
-  grid-area: 3/1;
-}
-body div .password01 {
-  grid-area: 4/1;
-}
-body div .e-name {
-  grid-area: 2/2;
-}
-body div .pass0 {
-  grid-area: 3/2;
-}
-body div .pass1 {
-  grid-area: 4/2;
 }
 
 body {

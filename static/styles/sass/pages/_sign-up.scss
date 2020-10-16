@@ -1,5 +1,9 @@
 // File: sign-up.scss
 
+@import '../tools/normalizer';
+@import '../helpers/base';
+@import '../helpers/variables';
+
 body {
     div {
         display: grid;
