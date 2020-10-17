@@ -11,13 +11,14 @@ html, body {
 }
 
 html {
-  font-family: "Lato", "Arial", sans-serif;
+  font-family: "Lato", "Arial", sans-serif !important;
   font-size: 20px;
   text-rendering: optimizeLegibility;
   overflow-y: hidden;
 }
 
 body {
+  color: #cfd9e4;
   background-color: #1c2732;
 }
 
@@ -28,10 +29,7 @@ body div {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-70%, -70%);
-  color: #cfd9e4;
-  /* margin-top: auto;
-  margin-bottom: auto; */
+  transform: translate(-60%, -60%);
 }
 body div h2 {
   grid-area: 1/1;

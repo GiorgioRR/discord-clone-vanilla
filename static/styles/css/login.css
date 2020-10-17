@@ -11,13 +11,14 @@ html, body {
 }
 
 html {
-  font-family: "Lato", "Arial", sans-serif;
+  font-family: "Lato", "Arial", sans-serif !important;
   font-size: 20px;
   text-rendering: optimizeLegibility;
   overflow-y: hidden;
 }
 
 body {
+  color: #cfd9e4;
   background-color: #1c2732;
 }
 
@@ -29,21 +30,22 @@ body form {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-70%, -70%);
-  /* margin-top: auto;
-  margin-bottom: auto; */
+  transform: translate(-60%, -60%);
 }
 body form a {
   text-decoration: none;
+  color: #cfd9e4;
   grid-area: 4/2;
 }
+body form a:hover, body form a:active {
+  color: #fff;
+}
 body form h2 {
-  font-size: 20px;
   grid-area: 1/1;
   margin-bottom: 10px;
 }
 body form h3 {
-  font-size: 17px;
+  font-size: 16px;
   grid-column: 1;
 }
 body form .username {

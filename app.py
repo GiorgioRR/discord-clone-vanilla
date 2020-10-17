@@ -358,48 +358,8 @@ def init_db():
     db.session.commit()
 
 
-def db_sqlite():
-    global db
-
-    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DATABASE}"
-    db = SQLAlchemy(app)
-
-
-def db_mongo():
-    link = input("db address: ")
-
-    try:
-        my_client = pymongo.MongoClient(link)
-        my_client.server_info()
-
-        my_db = my_client["discord"]
-        users = my_db["users"]
-        messages = my_db["messages"]
-    except pymongo.errors.DuplicateKeyError:
-        db_mongo()
-
-
-def db_choose():
-    info = '''
-    [m]ongoDB
-    [S]QLite
-    Choose your db (m or s): 
-    '''
-
-    db = "s"  # input(info).strip().lower()
-
-    if db == "m":
-        db_mongo()
-    elif db == "s":
-        init_db()  # comment out for a testing mode
-
-        db_sqlite()
-    else:
-        db_choose()
-
-
 def main():
-    # db_choose()  # choose a db type
+    init_db()
 
     socketio.run(app, debug=True)  # app.run(debug=True)  # debug=True, host="169.254.110.104", port=5010
 

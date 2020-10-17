@@ -9,13 +9,12 @@ body {
         display: grid;
         grid-row-gap: 1.4px;
         grid-column-gap: 2px;
+
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-70%, -70%);
-        color: #cfd9e4;
-        /* margin-top: auto;
-        margin-bottom: auto; */
+        transform: translate(-60%, -60%);
+        // color: #cfd9e4;
 
         h2 {
             grid-area: 1 / 1;

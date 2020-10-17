@@ -14,23 +14,27 @@ body {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-70%, -70%);
-        /* margin-top: auto;
-        margin-bottom: auto; */
+        transform: translate(-60%, -60%); // translate(-180px, -40px);
 
         a {
             text-decoration: none;
+            color: #cfd9e4;
             grid-area: 4 / 2;
+
+            &:hover,
+            &:active {
+                color: #fff;
+            }
         }
 
         h2 {
-            font-size: 20px;
+            // font-size: 20px;
             grid-area: 1 / 1;
             margin-bottom: 10px;
         }
 
         h3 {
-            font-size: 17px;
+            font-size: 16px;
             grid-column: 1;
         }
 
