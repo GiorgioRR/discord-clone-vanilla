@@ -1,5 +1,5 @@
 /* 
-sass --watch .\static\styles\sass\_main.scss:.\static\styles\css\main.css
+sass --watch .\static\styles\sass\pages\_chat.scss:.\static\styles\css\chat.css
 sass --watch .\static\styles\sass\pages\_login.scss:.\static\styles\css\login.css
 sass --watch .\static\styles\sass\pages\_sign-up.scss:.\static\styles\css\sign-up.css
 
@@ -21,13 +21,14 @@ html, body {
 }
 
 html {
-  font-family: "Lato", "Arial", sans-serif;
+  font-family: "Lato", "Arial", sans-serif !important;
   font-size: 20px;
   text-rendering: optimizeLegibility;
   overflow-y: hidden;
 }
 
 body {
+  color: #cfd9e4;
   background-color: #1c2732;
 }
 
@@ -195,4 +196,4 @@ body #right .online {
   }
 }
 
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=chat.css.map */
