@@ -2,3 +2,4 @@
 __pycache__/
 temp/
 shared/
+sql/database.db
