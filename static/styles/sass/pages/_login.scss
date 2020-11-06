@@ -1,8 +1,6 @@
 // File: login.scss
 
-@import '../helpers/base';
-
-body {
+.login-f {
     form {
         display: grid;
         grid-template-columns: 90px 200px 30px;

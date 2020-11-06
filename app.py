@@ -18,8 +18,7 @@ import pymongo
 # from models import User, Message
 
 port = 5000
-current  = f"{os.getcwd()}\\"
-DATABASE = f"{current}sql\\database.db"  # database = f"{current}api\\00users.json"
+DATABASE = r'.\sql\database.db'
 
 categories = ["welcome", "announcements", "rules", "whoami", "general", "ლინუქსი", "მეცნიერება", "კრიპტოგრაფია",
               "coding-challenges", "movies-n-books", "hacking-penetration-forensics-ctf", "multiplayer-games",
@@ -165,7 +164,7 @@ def find_page(category):
             if ad.only_alphabet_chars(category, "Latin"):
                 category = category.capitalize()
 
-            return render_template("index.html", user_name=username, title=category.encode("utf-8"), messages=mm)
+            return render_template("index.html", user_name=username, title=category.encode("utf-8"), messages=mm, className="index")
         # num_of_users=num_of_users,
         # num_of_offliners=len(offliners),
         # online=online,
@@ -180,7 +179,7 @@ def find_page(category):
 @app.route("/login/", methods=["POST", "GET"])
 @cache.cached(timeout=50, key_prefix="all_categories")
 def log_in():
-    return render_template("login.html")
+    return render_template("login.html", className="login-f")
 
 
 @app.route("/log_out/", methods=["POST", "GET"])
@@ -207,7 +206,7 @@ def sign_up():
     except:  # [NameError, AttributeError]
         pass
 
-    return render_template("sign-up.html")
+    return render_template("sign-up.html", className="sign-up-f")
 
 
 @socketio.on("siggnn")
