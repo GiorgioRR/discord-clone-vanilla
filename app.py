@@ -49,6 +49,7 @@ ad = AlphabetDetector()
 status = {}
 
 app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DATABASE}"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 
